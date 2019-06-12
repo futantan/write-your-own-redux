@@ -42,3 +42,13 @@ store.dispatch({ type: "DECREMENT" });
 unsubscribe();
 store.dispatch({ type: "DECREMENT" });
 console.log(store.getState());
+
+function todos(state = [], action) {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return state.concat([action.text])
+    default:
+      return state
+  }
+}
+
