@@ -14,10 +14,10 @@ function counter(state = 0, action) {
 
 const store = createStore(counter)
 
-store.subscribe(() => console.log(store.getState()))
+const unsubscribe = store.subscribe(() => console.log(store.getState()))
 
 store.dispatch({ type: 'INCREMENT' })
 store.dispatch({ type: 'INCREMENT' })
 store.dispatch({ type: 'DECREMENT' })
-// unsubscribe();
+unsubscribe();
 store.dispatch({ type: 'DECREMENT' })
