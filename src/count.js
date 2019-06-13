@@ -56,9 +56,43 @@ const combinedReducer = combineReducer({ counter, todos });
 
 const store = createStore(combinedReducer, 0);
 
-const unsubscribe = store.subscribe(() => console.log(store.getState()));
+// const unsubscribe = store.subscribe(() => console.log(store.getState()));
 
-store.dispatch({ type: "ADD_TODO", text: "hello" });
+const action1 = { type: "ADD_TODO", text: "hello" };
+
+
+
+
+
+
+
+
+
+
+
+
+
+console.log('dispatching', action1);
+store.dispatch(action1);
+console.log('next state', store.getState());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 store.dispatch({ type: "ADD_TODO", text: "world" });
 store.dispatch({ type: "INCREMENT" });
 store.dispatch({ type: "INCREMENT" });
