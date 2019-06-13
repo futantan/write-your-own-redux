@@ -68,6 +68,18 @@ const patchStoreToAddLogging = (store) => {
   };
 };
 
+const patchStoreToAddCrashReport = (store) => {
+  const next = store.dispatch;
+  store.dispatch = (action) => {
+    try {
+      return next(action);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+patchStoreToAddCrashReport(store);
 patchStoreToAddLogging(store);
 
 store.dispatch({ type: 'ADD_TODO', text: 'hello' });
