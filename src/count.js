@@ -1,4 +1,4 @@
-const R = require("ramda");
+const R = require('ramda');
 
 const createStore = (reducer, state) => {
   let storeState = state;
@@ -34,9 +34,9 @@ const combineReducer = reducers => {
 
 function counter(state = 0, action) {
   switch (action.type) {
-    case "INCREMENT":
+    case 'INCREMENT':
       return state + 1;
-    case "DECREMENT":
+    case 'DECREMENT':
       return state - 1;
     default:
       return state;
@@ -45,7 +45,7 @@ function counter(state = 0, action) {
 
 function todos(state = [], action) {
   switch (action.type) {
-    case "ADD_TODO":
+    case 'ADD_TODO':
       return state.concat([action.text]);
     default:
       return state;
@@ -58,22 +58,20 @@ const store = createStore(combinedReducer, 0);
 
 // const unsubscribe = store.subscribe(() => console.log(store.getState()));
 
-const action = { type: "ADD_TODO", text: "hello" };
-
-
-const dispatchAndLog = (store, action) => {
+const next = store.dispatch;
+store.dispatch = (action) => {
   console.log('dispatching', action);
-  store.dispatch(action);
+  const result = next(action);
   console.log('next state', store.getState());
+  return result;
 };
 
-dispatchAndLog(store, action);
+store.dispatch({ type: 'ADD_TODO', text: 'hello' });
 
-
-dispatchAndLog(store, { type: "ADD_TODO", text: "world" });
-dispatchAndLog(store, { type: "INCREMENT" });
-dispatchAndLog(store, { type: "INCREMENT" });
-dispatchAndLog(store, { type: "DECREMENT" });
+store.dispatch({ type: 'ADD_TODO', text: 'world' });
+store.dispatch({ type: 'INCREMENT' });
+store.dispatch({ type: 'INCREMENT' });
+store.dispatch({ type: 'DECREMENT' });
 // unsubscribe();
-dispatchAndLog(store, { type: "DECREMENT" });
+store.dispatch({ type: 'DECREMENT' });
 // console.log(store.getState());
