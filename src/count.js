@@ -58,13 +58,17 @@ const store = createStore(combinedReducer, 0);
 
 // const unsubscribe = store.subscribe(() => console.log(store.getState()));
 
-const next = store.dispatch;
-store.dispatch = (action) => {
-  console.log('dispatching', action);
-  const result = next(action);
-  console.log('next state', store.getState());
-  return result;
+const patchStoreToAddLogging = (store) => {
+  const next = store.dispatch;
+  store.dispatch = (action) => {
+    console.log('dispatching', action);
+    const result = next(action);
+    console.log('next state', store.getState());
+    return result;
+  };
 };
+
+patchStoreToAddLogging(store);
 
 store.dispatch({ type: 'ADD_TODO', text: 'hello' });
 
