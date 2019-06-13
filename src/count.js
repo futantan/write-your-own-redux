@@ -58,45 +58,22 @@ const store = createStore(combinedReducer, 0);
 
 // const unsubscribe = store.subscribe(() => console.log(store.getState()));
 
-const action1 = { type: "ADD_TODO", text: "hello" };
+const action = { type: "ADD_TODO", text: "hello" };
 
 
+const dispatchAndLog = (store, action) => {
+  console.log('dispatching', action);
+  store.dispatch(action);
+  console.log('next state', store.getState());
+};
+
+dispatchAndLog(store, action);
 
 
-
-
-
-
-
-
-
-
-
-console.log('dispatching', action1);
-store.dispatch(action1);
-console.log('next state', store.getState());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-store.dispatch({ type: "ADD_TODO", text: "world" });
-store.dispatch({ type: "INCREMENT" });
-store.dispatch({ type: "INCREMENT" });
-store.dispatch({ type: "DECREMENT" });
+dispatchAndLog(store, { type: "ADD_TODO", text: "world" });
+dispatchAndLog(store, { type: "INCREMENT" });
+dispatchAndLog(store, { type: "INCREMENT" });
+dispatchAndLog(store, { type: "DECREMENT" });
 // unsubscribe();
-store.dispatch({ type: "DECREMENT" });
+dispatchAndLog(store, { type: "DECREMENT" });
 // console.log(store.getState());
